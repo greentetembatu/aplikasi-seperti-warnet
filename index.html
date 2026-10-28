@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aplikasi Kasir Rental</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="fotocopy.ico" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#ffffff" />
+  </head>
+  <body>
+    <!-- TAMPILAN DASHBOARD (UTAMA) -->
+
+    <div id="dashboardView" class="container active">
+      <div class="header">
+        <h2>DASHBOARD</h2>
+        <button onclick="switchView('loginView')" class="btn-nav">
+          MASUK ADMIN
+        </button>
+             <button id="installBtn" style="display: none; width: 100%; padding: 10px; background: #28a745; color: white; border: none; border-radius: 5px; margin-bottom: 15px; font-weight: bold; cursor: pointer;">
+    📲 INSTALL APLIKASI KE HP
+</button>
+
+      </div>
+      <!-- GRID CONTAINER: 3 Baris x 2 Kolom -->
+      <div class="grid-container">
+        <!-- Baris 1, Kolom 1 -->
+        <div class="card">
+          <h3>BIAYA EDIT DOKUMEN</h3>
+          <div class="timer-display" id="time-edit">00:00:00:00</div>
+          <div class="controls">
+            <button onclick="startTimer('edit')" class="btn-start">
+              MULAI
+            </button>
+            <button onclick="stopTimer('edit')" class="btn-stop">STOP</button>
+          </div>
+          <div class="cost-display">
+            JUMLAH: <span id="cost-edit">Rp 0</span>
+          </div>
+        </div>
+
+        <!-- Baris 1, Kolom 2 -->
+        <div class="card">
+          <h3>BIAYA KETIK DOKUMEN</h3>
+          <div class="timer-display" id="time-ketik">00:00:00:00</div>
+          <div class="controls">
+            <button onclick="startTimer('ketik')" class="btn-start">
+              MULAI
+            </button>
+            <button onclick="stopTimer('ketik')" class="btn-stop">STOP</button>
+          </div>
+          <div class="cost-display">
+            JUMLAH: <span id="cost-ketik">Rp 0</span>
+          </div>
+        </div>
+
+        <!-- Baris 2, Kolom 1 -->
+        <div class="card">
+          <h3>BIAYA EDIT GAMBAR</h3>
+          <div class="timer-display" id="time-gambar">00:00:00:00</div>
+          <div class="controls">
+            <button onclick="startTimer('gambar')" class="btn-start">
+              MULAI
+            </button>
+            <button onclick="stopTimer('gambar')" class="btn-stop">STOP</button>
+          </div>
+          <div class="cost-display">
+            JUMLAH: <span id="cost-gambar">Rp 0</span>
+          </div>
+        </div>
+
+        <!-- Baris 2, Kolom 2 -->
+        <div class="card">
+          <h3>BIAYA BROWSING</h3>
+          <div class="timer-display" id="time-browsing">00:00:00:00</div>
+          <div class="controls">
+            <button onclick="startTimer('browsing')" class="btn-start">
+              MULAI
+            </button>
+            <button onclick="stopTimer('browsing')" class="btn-stop">
+              STOP
+            </button>
+          </div>
+          <div class="cost-display">
+            JUMLAH: <span id="cost-browsing">Rp 0</span>
+          </div>
+        </div>
+
+        <!-- Baris 3, Kolom 1 -->
+        <div class="card">
+          <h3>BIAYA RENTAL</h3>
+          <div class="timer-display" id="time-rental">00:00:00:00</div>
+          <div class="controls">
+            <button onclick="startTimer('rental')" class="btn-start">
+              MULAI
+            </button>
+            <button onclick="stopTimer('rental')" class="btn-stop">STOP</button>
+          </div>
+          <div class="cost-display">
+            JUMLAH: <span id="cost-rental">Rp 0</span>
+          </div>
+        </div>
+
+        <!-- Baris 3, Kolom 2: Total Box diletakkan di grid agar rapi -->
+        <div class="card total-box">
+          <h3>TOTAL KESELURUHAN</h3>
+          <h2 id="grand-total" style="font-size: 24px; margin: 15px 0">Rp 0</h2>
+          <button onclick="resetAll()" class="btn-reset">RESET SEMUA</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAMPILAN LOGIN ADMIN -->
+    <div id="loginView" class="container">
+      <div class="header">
+        <h2>LOGIN ADMIN</h2>
+        <button onclick="switchView('dashboardView')" class="btn-nav">
+          KEMBALI
+        </button>
+      </div>
+
+      <div class="admin-form">
+        <label>Nama Admin</label>
+        <input type="text" id="login-name" placeholder="Masukkan nama" />
+
+        <label>Password</label>
+        <input
+          type="password"
+          id="login-pass"
+          placeholder="Masukkan password"
+        />
+
+        <button onclick="loginAdmin()" class="btn-save">MASUK</button>
+        <p id="login-error" style="color: red; display: none">
+          Nama atau password salah!
+        </p>
+      </div>
+    </div>
+
+    <!-- TAMPILAN ADMIN (PENGATURAN) -->
+    <div id="adminView" class="container">
+      <div class="header">
+        <h2>ADMIN</h2>
+        <button onclick="logoutAdmin()" class="btn-nav">KELUAR</button>
+      </div>
+
+      <p style="text-align: center">
+        Selamat datang, <strong id="admin-name-display"></strong>
+      </p>
+
+      <div class="admin-form">
+        <label>Atur Biaya Edit Dokumen (Per Jam)</label>
+        <input type="number" id="rate-edit" value="10000" />
+
+        <label>Atur Biaya Ketik Dokumen (Per Jam)</label>
+        <input type="number" id="rate-ketik" value="10000" />
+
+        <label>Atur Biaya Edit Gambar (Per Jam)</label>
+        <input type="number" id="rate-gambar" value="10000" />
+
+        <label>Atur Biaya Browsing (Per Jam)</label>
+        <input type="number" id="rate-browsing" value="10000" />
+
+        <label>Atur Biaya Rental (Per Jam)</label>
+        <input type="number" id="rate-rental" value="10000" />
+
+        <button onclick="saveRates()" class="btn-save">
+          SIMPAN PENGATURAN
+        </button>
+        <p id="save-status" style="color: green; display: none">Tersimpan!</p>
+      </div>
+    </div>
+
+    
+    
+    <script src="script.js"></script>
+    
+    <!-- TAMBAHKAN SCRIPT INI UNTUK MENDAFTARKAN SERVICE WORKER -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker berhasil didaftarkan:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('ServiceWorker gagal didaftarkan:', error);
+                    });
+            });
+        }
+    </script>
+
+  </body>
+</html>

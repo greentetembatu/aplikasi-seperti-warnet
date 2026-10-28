@@ -1,0 +1,163 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 15px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    padding: 15px;
+    border: 2px solid #333;
+    display: none; /* Sembunyikan semua view awalnya */
+}
+
+.container.active {
+    display: block; /* Tampilkan view yang aktif */
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.btn-nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px 10px;
+    cursor: pointer;
+    background: #333;
+    color: white;
+    border: none;
+}
+
+/* Tambahkan / ganti bagian ini di style.css */
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 kolom sama lebar */
+    gap: 10px; /* Jarak antar kartu */
+    margin-bottom: 10px;
+}
+
+/* Penyesuaian Kartu agar muat di grid */
+.card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    background: #fafafa;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card h3 {
+    margin-top: 0;
+    font-size: 13px; /* Diperkecil agar muat 2 kolom */
+    text-transform: uppercase;
+    min-height: 35px; /* Supaya judul sejajar */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Timer disesuaikan agar 4 pasang angka muat */
+.timer-display {
+    font-size: 18px; 
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    margin: 10px 0;
+    color: #333;
+    letter-spacing: 0;
+}
+
+/* Tombol diperkecil agar muat di 2 kolom */
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.controls button {
+    padding: 6px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    border: 1px solid #333;
+    flex: 1; /* Tombol membagi rata */
+}
+
+.cost-display {
+    font-size: 13px;
+    font-weight: bold;
+    background: #eee;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+/* Khusus Kotak Total */
+.total-box {
+    background: #333;
+    color: white;
+    border: 1px solid #333;
+    justify-content: center;
+    align-items: center;
+}
+
+.total-box h3 {
+    color: #ddd;
+    margin-bottom: 0;
+}
+
+.total-box h2 {
+    color: #fff;
+    margin: 10px 0;
+}
+
+.btn-reset {
+    background-color: #ffc107;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    border-radius: 3px;
+}
+
+/* Responsive: Jika layar HP sangat kecil, ubah jadi 1 kolom */
+@media (max-width: 480px) {
+    .grid-container {
+        grid-template-columns: 1fr; /* Jadi 1 kolom di HP kecil */
+    }
+    .card h3 { font-size: 14px; }
+    .timer-display { font-size: 24px; }
+    .controls button { font-size: 14px; padding: 8px; }
+}
+
+/* Admin Styles */
+.admin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.admin-form input {
+    padding: 8px;
+    font-size: 16px;
+}
+
+.btn-save {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
